@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.12.RELEASE</version>
+  </parent>
+
+  <groupId>com.yunwuye.sample</groupId>
+  <artifactId>sample-portal-yunwuye-inc-com</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <spring-boot.version />
+    <dubbo.version>2.6.0</dubbo.version>
+    <dubbo-spring.version>2.0.0</dubbo-spring.version>
+    <swagger2.version>2.9.2</swagger2.version>
+    <fastjson.version>1.2.67</fastjson.version>
+    <test.version>4.11</test.version>
+    <guava.version>23.0</guava.version>
+    <httpmime.version>4.4</httpmime.version>
+    <httpclient.version>4.5.2</httpclient.version>
+    <httpcore.version>4.4.1</httpcore.version>
+    <commons-lang3.version>3.4</commons-lang3.version>
+    <commons-lang.version>2.6</commons-lang.version>
+    <quartz.version>2.1.4</quartz.version>
+    <commons-httpclient.version>3.1</commons-httpclient.version>
+    <sample.project.version>1.0.0-SNAPSHOT</sample.project.version>
+    <javax.servlet.version>3.1.0</javax.servlet.version>
+   <!--  <lombook.version>1.8.10</lombook.version> -->
+    <zookeeper.version>3.5.5</zookeeper.version>
+    <zkclient.version>0.11</zkclient.version>
+
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.zaxxer</groupId>
+          <artifactId>HikariCP</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>com.yunwuye.sample</groupId>
+        <artifactId>sample-srv-yunwuye-inc-com-domain</artifactId>
+        <version>${sample.project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.yunwuye.sample</groupId>
+        <artifactId>sample-srv-yunwuye-inc-com-client</artifactId>
+        <version>${sample.project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.yunwuye.sample</groupId>
+        <artifactId>sample-portal-yunwuye-inc-com-controller</artifactId>
+        <version>${sample.project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${test.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!--Swagger-UI API文档生产工具 -->
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>${swagger2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger-ui</artifactId>
+        <version>${swagger2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>${commons-lang.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>${httpcore.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpmime</artifactId>
+        <version>${httpmime.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-httpclient</groupId>
+        <artifactId>commons-httpclient</artifactId>
+        <version>${commons-httpclient.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
+      </dependency>
+
+
+      <!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
+        <version>99.0-does-not-exist</version> </dependency> <dependency> <groupId>javax.servlet</groupId> 
+        <artifactId>javax.servlet-api</artifactId> <version>${javax.servlet.version}</version> 
+        </dependency> <dependency> <groupId>servlet-api</groupId> <artifactId>servlet-api</artifactId> 
+        <version>99.0-not-exist-SNAPSHOT</version> </dependency> -->
+
+      <!--dubbo 依赖 -->
+      <dependency>
+        <groupId>com.alibaba.spring.boot</groupId>
+        <artifactId>dubbo-spring-boot-starter</artifactId>
+        <version>${dubbo-spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>dubbo</artifactId>
+        <version>${dubbo.version}</version>
+      </dependency>
+
+      <!-- zeekeeper注册中心 -->
+      <dependency>
+        <groupId>org.apache.zookeeper</groupId>
+        <artifactId>zookeeper</artifactId>
+        <version>${zookeeper.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.101tec</groupId>
+        <artifactId>zkclient</artifactId>
+        <version>${zkclient.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+  <modules>
+    <module>sample-portal-yunwuye-inc-com-start</module>
+    <module>sample-portal-yunwuye-inc-com-controller</module>
+  </modules>
+</project>

@@ -1,0 +1,31 @@
+jwt:
+  header: Authorization
+  secret: mySecret
+  # token 过期时间/毫秒，6小时  1小时 = 3600000 毫秒
+  expiration: 21600000
+  # 在线用户key
+  online: online-token
+  # 验证码
+  codeKey: code-key
+
+#是否开启 swagger-ui
+swagger:
+  enabled: true
+
+# 文件存储路径cli
+file:
+  path: /opt/inservice/file/
+  avatar: /opt/inservice/avatar/
+  host:  http://127.0.0.1
+  # 文件大小 /M
+  maxSize: 100
+  avatarMaxSize: 5
+
+#梧桐对接数据
+resume:
+  wu:
+    tong:
+      key: ea121940f6c448c3
+      app:
+        id: 422
+        name: wtzhaopin

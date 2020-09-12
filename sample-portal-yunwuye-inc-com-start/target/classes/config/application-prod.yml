@@ -1,0 +1,39 @@
+#jwt
+jwt:
+  header: Authorization
+  secret: mySecret
+  # token 过期时间 2个小时
+  expiration: 7200000
+  # 在线用户key
+  online: online-token
+  # 验证码
+  codeKey: code-key
+
+#如果生产环境要开启swagger，需要配置请求地址
+#springfox:
+#  documentation:
+#    swagger:
+#      v2:
+#        host: # 接口域名或外网ip
+
+#是否开启 swagger-ui
+swagger:
+  enabled: false
+
+# 文件存储路径
+file:
+  path: /opt/inservice/file/
+  avatar: /opt/inservice/avatar/
+  host: http://inservice.isoftstonemag.cn
+  # 文件大小 /M
+  maxSize: 100
+  avatarMaxSize: 5
+
+#对接数据
+resume:
+  wu:
+    tong:
+      key: ea121940f6c448c3
+      app:
+        id: 422
+        name: wtzhaopin

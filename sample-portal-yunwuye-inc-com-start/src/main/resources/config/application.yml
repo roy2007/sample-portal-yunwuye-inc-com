@@ -1,0 +1,28 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sample-portal-yunwuye-inc-com-start
+  autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration, org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
+  dubbo:
+   application:
+    name: consumer
+   registry:
+    address: zookeeper://127.0.0.1:2181
+    packageName: com.yunwuye.sample.service.impl
+   timeout: 3000
+   protocol:
+    name: dubbo
+    #host: 192.168.3.50
+    port: 20881
+   consumer:
+     #filter: catTransaction
+     check: false
+    #consumer:
+    #check: false
+    #reference:
+    #loadbalance: roundrobin
+   scan: com.yunwuye.sample.service.impl

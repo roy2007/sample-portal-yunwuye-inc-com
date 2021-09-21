@@ -83,6 +83,9 @@ public class StudentController extends BaseController{
         /**只要不等于0，表示是异步，如果等于0表示同步*/
         if (!"0".equals (isAsync)) {
             count = studentService.batchAsyncUpdateStudentById (dtos);
+        } else if ("1".equals (isAsync)) {
+            // 自定义事务管理
+            studentService.batchUpdateStudentByIdForWithTransaction (dtos);
         } else {
             count = studentService.batchSyncUpdateStudentById (dtos);
         }

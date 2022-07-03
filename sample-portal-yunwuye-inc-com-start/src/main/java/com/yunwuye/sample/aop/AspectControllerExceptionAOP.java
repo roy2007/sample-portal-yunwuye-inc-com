@@ -3,7 +3,6 @@ package com.yunwuye.sample.aop;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,24 +14,23 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.alibaba.fastjson.JSON;
-import com.yunwuye.sample.common.base.enums.CommonResultCode;
-import com.yunwuye.sample.common.base.exception.CommonException;
-import com.yunwuye.sample.common.base.result.PageResult;
-import com.yunwuye.sample.common.base.result.Result;
-import com.yunwuye.sample.common.util.ResultUtil;
+import com.yunwuye.sample.enums.CommonResultCode;
+import com.yunwuye.sample.exception.CommonException;
+import com.yunwuye.sample.result.PageResult;
+import com.yunwuye.sample.result.Result;
+import com.yunwuye.sample.util.ResultUtil;
 
 @Aspect
 @Component
 public class AspectControllerExceptionAOP {
     private static final Logger logger = LoggerFactory.getLogger(AspectControllerExceptionAOP.class);
 
-    @Pointcut(value = "execution(public com.yunwuye.sample.common.base.result.PageResult *(..))")
+    @Pointcut (value = "execution(public com.yunwuye.sample.result.PageResult *(..))")
     public void handlerPageResultMethod() {
     }
 
-    @Pointcut(value = "execution(public com.yunwuye.sample.common.base.result.Result *(..))")
+    @Pointcut (value = "execution(public com.yunwuye.sample.result.Result *(..))")
     public void handlerResultMethod() {
     }
 

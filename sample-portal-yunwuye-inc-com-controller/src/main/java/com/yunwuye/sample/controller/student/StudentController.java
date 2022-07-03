@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yunwuye.sample.common.base.result.Result;
+import com.yunwuye.sample.client.service.StudentService;
 import com.yunwuye.sample.controller.BaseController;
 import com.yunwuye.sample.controller.student.vo.StudentVO;
 import com.yunwuye.sample.dto.StudentDTO;
-import com.yunwuye.sample.service.StudentService;
+import com.yunwuye.sample.result.Result;
 
 /**
  *

@@ -1,18 +1,14 @@
-
 package com.yunwuye.sample.validator;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
-
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Component;
-
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.yunwuye.sample.common.validator.AbstractBaseValidator;
-import com.yunwuye.sample.service.UserService;
+import com.yunwuye.sample.client.service.UserService;
+import com.yunwuye.sample.validator.AbstractBaseValidator;
 import com.yunwuye.sample.validator.annotation.ValidatorConfig;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
@@ -31,6 +27,7 @@ public class AclValidator extends AbstractBaseValidator<ValidatorConfig> {
     public Boolean validate(Annotation validatorConfig, String empId, Map<String, Object> nameWithValueMap) {
         log.info("validatorConfig: {}, nameWithValueMap: {} ", JSON.toJSONString(validatorConfig),
                 JSON.toJSONString(nameWithValueMap));
+        // by userService .....
         return Boolean.TRUE;
     }
 }

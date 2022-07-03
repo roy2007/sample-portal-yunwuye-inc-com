@@ -3,8 +3,8 @@ package com.yunwuye.sample.config;
 import org.springframework.context.annotation.Configuration;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yunwuye.sample.service.StudentService;
-import com.yunwuye.sample.service.UserService;
+import com.yunwuye.sample.client.service.StudentService;
+import com.yunwuye.sample.client.service.UserService;
 
 /**
  *

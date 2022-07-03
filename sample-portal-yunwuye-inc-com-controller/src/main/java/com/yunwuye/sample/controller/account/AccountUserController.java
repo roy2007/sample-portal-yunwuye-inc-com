@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yunwuye.sample.common.base.result.Result;
-import com.yunwuye.sample.common.util.ResultUtil;
+import com.yunwuye.sample.client.service.AccountUserService;
 import com.yunwuye.sample.controller.BaseController;
 import com.yunwuye.sample.controller.account.vo.AccountUserVO;
 import com.yunwuye.sample.dto.AccountUserDTO;
-import com.yunwuye.sample.service.AccountUserService;
+import com.yunwuye.sample.result.Result;
+import com.yunwuye.sample.util.ResultUtil;
 /**
  *
  * @author Roy

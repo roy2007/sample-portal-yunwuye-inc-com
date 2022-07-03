@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yunwuye.sample.common.base.result.PageResult;
-import com.yunwuye.sample.common.base.result.Result;
-import com.yunwuye.sample.common.util.ListUtil;
-import com.yunwuye.sample.common.util.ResultUtil;
-import com.yunwuye.sample.common.validator.annotation.Validator;
+import com.yunwuye.sample.client.service.UserService;
 import com.yunwuye.sample.controller.BaseController;
 import com.yunwuye.sample.controller.user.vo.UserVO;
 import com.yunwuye.sample.dto.UserDTO;
 import com.yunwuye.sample.param.user.UserParam;
-import com.yunwuye.sample.service.UserService;
+import com.yunwuye.sample.result.PageResult;
+import com.yunwuye.sample.result.Result;
+import com.yunwuye.sample.util.ListUtil;
+import com.yunwuye.sample.util.ResultUtil;
 import com.yunwuye.sample.validator.AclValidator;
+import com.yunwuye.sample.validator.annotation.Validator;
 import com.yunwuye.sample.validator.annotation.ValidatorConfig;
 
 /**

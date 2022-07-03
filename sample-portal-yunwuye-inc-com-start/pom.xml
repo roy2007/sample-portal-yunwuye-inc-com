@@ -36,10 +36,10 @@
       <artifactId>sample-srv-yunwuye-inc-com-domain</artifactId>
     </dependency>
 
-    <dependency>
+<!--     <dependency>
       <groupId>com.yunwuye.sample</groupId>
       <artifactId>sample-portal-yunwuye-inc-com-controller</artifactId>
-    </dependency>
+    </dependency> -->
 
     <!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-jdbc</artifactId> 
       <exclusions> <exclusion> <groupId>com.zaxxer</groupId> <artifactId>HikariCP</artifactId> 

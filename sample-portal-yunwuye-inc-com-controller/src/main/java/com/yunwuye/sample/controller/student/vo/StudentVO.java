@@ -1,6 +1,6 @@
 package com.yunwuye.sample.controller.student.vo;
 
-import com.yunwuye.sample.common.base.vo.BaseVO;
+import com.yunwuye.sample.vo.BaseVO;
 
 /**
  *

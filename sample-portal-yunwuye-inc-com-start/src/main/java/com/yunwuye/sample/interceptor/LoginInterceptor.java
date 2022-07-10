@@ -28,7 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor{
         Authentication authentication = SecurityContextHolder.getContext ().getAuthentication ();
         // 判断用户是否存在，不存在就跳转到登录界面
         if (authentication == null || StringUtils.isEmpty (authentication.getName ())) {
-            response.sendRedirect (request.getContextPath () + "/index.html");
+            response.sendRedirect (request.getContextPath () + "/index");
             return false;
         }
         return true;

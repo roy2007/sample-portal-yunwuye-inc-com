@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yunwuye.sample.controller.dto.LoginDto;
-import com.yunwuye.sample.security.jwt.JWTFilter;
 import com.yunwuye.sample.security.jwt.TokenProvider;
 
 /**
@@ -46,7 +45,7 @@ public class AuthenticationRestController {
       String jwt = tokenProvider.createToken(authentication, rememberMe);
 
       HttpHeaders httpHeaders = new HttpHeaders();
-      httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        httpHeaders.add (tokenProvider.getAuthorizeHeaderKey (), tokenProvider.getAuthorizePrefixKey () + jwt);
 
       return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
    }

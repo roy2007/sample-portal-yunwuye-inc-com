@@ -4,12 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.google.common.base.Predicates;
-
+import com.yunwuye.sample.security.jwt.TokenProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -18,13 +16,10 @@ import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.SecurityReference;
-import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-
 
 /**
  *
@@ -36,48 +31,52 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig{
 
-  @Bean
-  public Docket api() {
-    return new Docket(DocumentationType.SWAGGER_2)//
-        .select()//
-        .apis(RequestHandlerSelectors.any())//
-        .paths(Predicates.not(PathSelectors.regex("/error")))//
-        .build()//
-        .apiInfo(metadata())//
-        .useDefaultResponseMessages(false)//
-        .securitySchemes(Collections.singletonList(apiKey()))
-        .securityContexts(Collections.singletonList(securityContext()))
-        .tags(new Tag("users", "Operations about users"))//
-        .genericModelSubstitutes(Optional.class);
+    @Autowired
+    private TokenProvider tokenProvider;
 
-  }
+    @Bean
+    public Docket api () {
+        return new Docket (DocumentationType.SWAGGER_2)//
+                        .select ()//
+                        .apis (RequestHandlerSelectors.basePackage ("com.yunwuye.sample.controller"))// RequestHandlerSelectors.any()
+                        .paths (PathSelectors.any ())// Predicates.not(PathSelectors.regex("/error"))
+                        .build ()//
+                        .apiInfo (metadata ())//
+                        .useDefaultResponseMessages (false)//
+                        .securitySchemes (Collections.singletonList (apiKey ()))
+                        .securityContexts (Collections.singletonList (securityContext ()))
+                        // .tags (new Tag ("users", "Operations about users"))//
+                        .genericModelSubstitutes (Optional.class);
+    }
 
-  private ApiInfo metadata() {
-    return new ApiInfoBuilder()//
-        .title("JSON Web Token Authentication API")//
-        .description("This is a sample JWT authentication service. You can find out more about JWT at [https://jwt.io/](https://jwt.io/). For this sample, you can use the `admin` or `client` users (password: admin and client respectively) to test the authorization filters. Once you have successfully logged in and obtained the token, you should click on the right top button `Authorize` and introduce it with the prefix \"Bearer \".")//
-        .version("1.0.0")//
-        .license("MIT License").licenseUrl("http://opensource.org/licenses/MIT")//
-        .contact(new Contact(null, null, "mauriurraco@gmail.com"))//
-        .build();
-  }
-  
-  private ApiKey apiKey() {
-    return new ApiKey("Authorization", "Authorization", "header");
-  }
+    private ApiInfo metadata () {
+        return new ApiInfoBuilder ()//
+                        .title ("JSON Web Token 令牌认证 API")//
+                        .description ("这是一个示例 JWT 身份验证服务。 您可以在 [https://jwt.io/](https://jwt.io/)上找到有关 JWT 的更多信息。 "
+                                        + "对于此示例，您可以使用 `admin` 或 `client` 用户（密码分别为 admin 和 client）来测试授权过滤器。"
+                                        + " 成功登录并获得token后， 点击右上方按钮`Authorize` ，引入前缀 \"Bearer \".")//
+                        .version ("1.0.0")//
+                        .license ("MIT License").licenseUrl ("http://opensource.org/licenses/MIT")//
+                        .contact (new Contact (null, null, "yunwuyeDeveloper@gmail.com"))//
+                        .build ();
+    }
 
-  private SecurityContext securityContext() {
-    return SecurityContext.builder()
-        .securityReferences(defaultAuth())
-        .forPaths(PathSelectors.any())
-        .build();
-  }
+    private ApiKey apiKey () {
+        String authorizeHeaderKey = tokenProvider.getAuthorizeHeaderKey ();
+        return new ApiKey (authorizeHeaderKey, authorizeHeaderKey, "header");
+    }
 
-  private List<SecurityReference> defaultAuth() {
-    AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-    AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-    authorizationScopes[0] = authorizationScope;
-    return Arrays.asList(new SecurityReference("Authorization", authorizationScopes));
-  }
+    private SecurityContext securityContext () {
+        return SecurityContext.builder ()
+                        .securityReferences (defaultAuth ())
+                        .forPaths (PathSelectors.any ())
+                        .build ();
+    }
 
+    private List<SecurityReference> defaultAuth () {
+        AuthorizationScope authorizationScope = new AuthorizationScope ("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return Arrays.asList (new SecurityReference (tokenProvider.getAuthorizeHeaderKey (), authorizationScopes));
+    }
 }

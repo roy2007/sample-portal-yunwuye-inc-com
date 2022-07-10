@@ -53,6 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers(HttpMethod.OPTIONS, "/**")
 
          // allow anonymous resource requests
+                        .antMatchers ("/v2/api-docs")
+                        .antMatchers ("/swagger-resources/**")//
+                        .antMatchers ("/swagger-ui.html")//
+                        .antMatchers ("/configuration/**")//
+                        .antMatchers ("/webjars/**")//
          .antMatchers(
             "/",
             "/*.html",
@@ -75,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 
                         // If a user try to access a resource without having enough permissions
-                        .exceptionHandling ().accessDeniedPage ("/index.html")
+                        .exceptionHandling ().accessDeniedPage ("/index")
          .authenticationEntryPoint(authenticationErrorHandler)
          .accessDeniedHandler(jwtAccessDeniedHandler)
 

@@ -105,7 +105,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
          .antMatchers("/api/person").hasAuthority("ROLE_USER")
          .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
-
+                        .antMatchers ("/student/**").authenticated ()
                         // only login all permit all
          .anyRequest().authenticated()
          .and()

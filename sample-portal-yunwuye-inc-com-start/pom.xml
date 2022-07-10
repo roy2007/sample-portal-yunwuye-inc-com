@@ -67,8 +67,7 @@
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt-jackson</artifactId>
-      <version>${jjwt.version}</version>
-    </dependency>
+      </dependency>
     <!-- jwt 及相关 -->
 
     <dependency>
@@ -81,8 +80,10 @@
       <artifactId>sample-srv-yunwuye-inc-com-domain</artifactId>
     </dependency>
 
-    <!-- <dependency> <groupId>com.yunwuye.sample</groupId> <artifactId>sample-portal-yunwuye-inc-com-controller</artifactId> 
-      </dependency> -->
+  <dependency>
+    <groupId>com.yunwuye.sample</groupId>
+    <artifactId>sample-portal-yunwuye-inc-com-controller</artifactId>
+  </dependency>
 
     <!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-jdbc</artifactId> 
       <exclusions> <exclusion> <groupId>com.zaxxer</groupId> <artifactId>HikariCP</artifactId> 

@@ -33,7 +33,7 @@
     <commons-httpclient.version>3.1</commons-httpclient.version>
     <sample.project.version>1.0.0-SNAPSHOT</sample.project.version>
     <javax.servlet.version>3.1.0</javax.servlet.version>
-   <!--  <lombook.version>1.8.10</lombook.version> -->
+    <jjwt.version>0.10.6</jjwt.version>
     <zookeeper.version>3.5.5</zookeeper.version>
     <zkclient.version>0.11</zkclient.version>
 
@@ -67,6 +67,22 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <!-- Starter for using Spring Security -->
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <!-- Make method based security testing easier -->
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -198,8 +214,27 @@
         <version>${zkclient.version}</version>
       </dependency>
 
+      <!-- JSON Web Token Support -->
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-api</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-impl</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt-jackson</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
+
   <modules>
     <module>sample-portal-yunwuye-inc-com-start</module>
     <module>sample-portal-yunwuye-inc-com-controller</module>

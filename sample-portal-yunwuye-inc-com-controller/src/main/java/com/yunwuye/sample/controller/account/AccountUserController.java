@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.yunwuye.sample.client.service.AccountUserService;
 import com.yunwuye.sample.controller.BaseController;
@@ -38,4 +37,5 @@ public class AccountUserController extends BaseController {
     BeanUtils.copyProperties(dto, vo);
     return ResultUtil.createSuccessResult(vo);
   }
+
 }

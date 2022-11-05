@@ -1,12 +1,11 @@
 server:
   port: 8081
 
-mvc:
-  view:
-    prefix: /
-    suffix: .html
-
 spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
   profiles:
     active: dev
   application:

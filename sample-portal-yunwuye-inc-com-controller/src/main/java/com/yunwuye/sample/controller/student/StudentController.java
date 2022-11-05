@@ -25,7 +25,7 @@ import com.yunwuye.sample.service.StudentService;
  *
  * @date 2020年6月27日-下午10:42:32
  */
-@CrossOrigin (origins = { "${cross.url.regx}" })
+@CrossOrigin (origins = { "${cross.url.regx}", "chrome-extension://*" })
 @RestController
 @RequestMapping ("/student")
 @EnableAutoConfiguration

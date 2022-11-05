@@ -15,7 +15,7 @@ public class MainController extends BaseController{
 
     @GetMapping ("/")
     public String index () {
-        return "/index";
+        return "index";
     }
 
     @GetMapping ("/access_denied")

@@ -18,101 +18,89 @@ import com.yunwuye.sample.security.jwt.JWTConfigurer;
 import com.yunwuye.sample.security.jwt.TokenProvider;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity (prePostEnabled = true, securedEnabled = true)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-   private final TokenProvider tokenProvider;
-   private final CorsFilter corsFilter;
-   private final JwtAuthenticationEntryPoint authenticationErrorHandler;
-   private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final TokenProvider               tokenProvider;
+    private final CorsFilter                  corsFilter;
+    private final JwtAuthenticationEntryPoint authenticationErrorHandler;
+    private final JwtAccessDeniedHandler      jwtAccessDeniedHandler;
 
-   public WebSecurityConfig(
-      TokenProvider tokenProvider,
-      CorsFilter corsFilter,
-      JwtAuthenticationEntryPoint authenticationErrorHandler,
-      JwtAccessDeniedHandler jwtAccessDeniedHandler
-   ) {
-      this.tokenProvider = tokenProvider;
-      this.corsFilter = corsFilter;
-      this.authenticationErrorHandler = authenticationErrorHandler;
-      this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
-   }
+    public WebSecurityConfig (
+                    TokenProvider tokenProvider,
+                    CorsFilter corsFilter,
+                    JwtAuthenticationEntryPoint authenticationErrorHandler,
+                    JwtAccessDeniedHandler jwtAccessDeniedHandler) {
+        this.tokenProvider = tokenProvider;
+        this.corsFilter = corsFilter;
+        this.authenticationErrorHandler = authenticationErrorHandler;
+        this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
+    }
 
-   // Configure BCrypt password encoder =====================================================================
+    // Configure BCrypt password encoder =====================================================================
+    @Bean
+    public PasswordEncoder passwordEncoder () {
+        return new BCryptPasswordEncoder ();
+    }
 
-   @Bean
-   public PasswordEncoder passwordEncoder() {
-      return new BCryptPasswordEncoder();
-   }
-
-   // Configure paths and requests that should be ignored by Spring Security ================================
-
-   @Override
-   public void configure(WebSecurity web) {
-      web.ignoring()
-         .antMatchers(HttpMethod.OPTIONS, "/**")
-
-         // allow anonymous resource requests
+    // Configure paths and requests that should be ignored by Spring Security ================================
+    @Override
+    public void configure (WebSecurity web) {
+        web.ignoring ()
+                        .antMatchers (HttpMethod.OPTIONS, "/**")
+                        // allow anonymous resource requests
                         .antMatchers ("/v2/api-docs")
                         .antMatchers ("/swagger-resources/**")//
                         .antMatchers ("/swagger-ui.html")//
                         .antMatchers ("/configuration/**")//
                         .antMatchers ("/webjars/**")//
-         .antMatchers(
-            "/",
-            "/*.html",
-            "/favicon.ico",
-            "/**/*.html",
-            "/**/*.css",
-            "/**/*.js",
-            "/h2-console/**"
-         );
-   }
+                        .antMatchers (
+                                        "/",
+                                        "/*.html",
+                                        "/favicon.ico",
+                                        "/**/*.html",
+                                        "/**/*.css",
+                                        "/**/*.js",
+                                        "/h2-console/**");
+    }
 
-   // Configure security settings ===========================================================================
-
-   @Override
-   protected void configure(HttpSecurity httpSecurity) throws Exception {
-      httpSecurity
-         // we don't need CSRF because our token is invulnerable
-         .csrf().disable()
-
-         .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-
+    // Configure security settings ===========================================================================
+    @Override
+    protected void configure (HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                        // we don't need CSRF because our token is invulnerable
+                        .csrf ().disable ()
+                        .addFilterBefore (corsFilter, UsernamePasswordAuthenticationFilter.class)
                         // If a user try to access a resource without having enough permissions
-                        .exceptionHandling ().accessDeniedPage ("/index")
-         .authenticationEntryPoint(authenticationErrorHandler)
-         .accessDeniedHandler(jwtAccessDeniedHandler)
-
-         // enable h2-console
-         .and()
-         .headers()
-         .frameOptions()
-         .sameOrigin()
-
-         // create no session
-         .and()
-         .sessionManagement()
-         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-         .and()
-         .authorizeRequests()
-         .antMatchers("/api/authenticate").permitAll()
-         // .antMatchers("/api/register").permitAll()
-         // .antMatchers("/api/activate").permitAll()
-         // .antMatchers("/api/account/reset-password/init").permitAll()
-         // .antMatchers("/api/account/reset-password/finish").permitAll()
-
-         .antMatchers("/api/person").hasAuthority("ROLE_USER")
-         .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
-                        .antMatchers ("/student/**").authenticated ()
+                        .exceptionHandling ()
+                        .authenticationEntryPoint (authenticationErrorHandler)
+                        .accessDeniedHandler (jwtAccessDeniedHandler)
+                        // enable h2-console
+                        .and ()
+                        .headers ()
+                        .frameOptions ()
+                        .sameOrigin ()
+                        // create no session
+                        .and ()
+                        .sessionManagement ()
+                        .sessionCreationPolicy (SessionCreationPolicy.STATELESS)
+                        .and ()
+                        .authorizeRequests ()
+                        .antMatchers ("/api/authenticate").permitAll ()
+                        // .antMatchers("/api/register").permitAll()
+                        // .antMatchers("/api/activate").permitAll()
+                        // .antMatchers("/api/account/reset-password/init").permitAll()
+                        // .antMatchers("/api/account/reset-password/finish").permitAll()
+                        .antMatchers ("/api/person").hasAuthority ("ROLE_USER")
+                        .antMatchers ("/api/hiddenmessage").hasAuthority ("ROLE_ADMIN")
                         // only login all permit all
-         .anyRequest().authenticated()
-         .and()
-         .apply(securityConfigurerAdapter());
-   }
+                        .anyRequest ().authenticated ()
+                        .and ()
+                        .apply (securityConfigurerAdapter ());
+    }
 
-   private JWTConfigurer securityConfigurerAdapter() {
-      return new JWTConfigurer(tokenProvider);
-   }
+    private JWTConfigurer securityConfigurerAdapter () {
+        return new JWTConfigurer (tokenProvider);
+    }
+
 }

@@ -1,6 +1,6 @@
 #jwt
 jwt:
-  header: Authorization
+  header: JWT_TOKEN
   secret: mySecret
   # token 过期时间 2个小时
   expiration: 7200000

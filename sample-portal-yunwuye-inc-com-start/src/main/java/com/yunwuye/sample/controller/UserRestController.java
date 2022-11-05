@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yunwuye.sample.client.service.AccountUserService;
+import com.yunwuye.sample.common.base.result.Result;
 import com.yunwuye.sample.dto.AccountUserDTO;
-import com.yunwuye.sample.result.Result;
 import com.yunwuye.sample.security.SecurityUtils;
+import com.yunwuye.sample.service.AccountUserService;
 
 
 @RestController

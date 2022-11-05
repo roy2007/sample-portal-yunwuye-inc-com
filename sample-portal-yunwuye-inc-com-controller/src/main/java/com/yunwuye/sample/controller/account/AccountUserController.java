@@ -4,22 +4,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.yunwuye.sample.client.service.AccountUserService;
+import com.yunwuye.sample.common.base.result.Result;
+import com.yunwuye.sample.common.util.ResultUtil;
 import com.yunwuye.sample.controller.BaseController;
 import com.yunwuye.sample.controller.account.vo.AccountUserVO;
 import com.yunwuye.sample.dto.AccountUserDTO;
-import com.yunwuye.sample.result.Result;
-import com.yunwuye.sample.util.ResultUtil;
+import com.yunwuye.sample.service.AccountUserService;
+
 /**
  *
  * @author Roy
  *
  * @date 2020年8月15日-下午3:40:23
  */
+@CrossOrigin (origins = { "${cross.url.regx}" })
 @RestController
 @RequestMapping("/account")
 @EnableAutoConfiguration

@@ -10,6 +10,7 @@ $(function () {
    var $response = $("#response");
    var $login = $("#login");
    var $userInfo = $("#userInfo").hide();
+   console.log("======================================"+document.cookie.split("; ") + document.charset+"======================================");
 
    // FUNCTIONS =============================================================
    function getJwtToken() {
@@ -17,12 +18,29 @@ $(function () {
    }
 
    function setJwtToken(token) {
+	   console.log("qqqqqqqqqqqq"+ localStorage.getItem(TOKEN_KEY));
       localStorage.setItem(TOKEN_KEY, token);
    }
 
    function removeJwtToken() {
       localStorage.removeItem(TOKEN_KEY);
    }
+
+   function checkTokenValidity(token) {
+      console.log(token);
+      if (token) {
+         const JWT = token;
+         const jwtPayload = JSON.parse(window.atob(JWT.split('.')[1]))
+         const expiresAt = jwtPayload.exp;
+         console.log(expiresAt);
+         var d1 = new Date(jwtPayload.exp * 1000);
+         console.log(d1);
+         var actualTimeIn = (expiresAt * 1000) - new Date().getTime();
+         console.log("qqqqqqwqwqw111111111111"+ actualTimeIn)
+         return (expiresAt * 1000) > new Date().getTime()
+      }
+      return false
+    }
 
    function doLogin(loginData) {
       $.ajax({
@@ -68,7 +86,7 @@ $(function () {
    function createAuthorizationTokenHeader() {
       var token = getJwtToken();
       if (token) {
-         return {"Authorization": "Bearer " + token};
+         return {"JWT_TOKEN": "Bearer " + token};
       } else {
          return {};
       }
@@ -138,6 +156,23 @@ $(function () {
 
    $("#logoutButton").click(doLogout);
 
+   $("#loginUserServiceBtn").click(function () {
+	      $.ajax({
+	         url: "/student/find",
+	         type: "GET",
+	         data: {"id": 1},
+	         contentType: "application/json; charset=utf-8",
+	         dataType: "json",
+	         headers: createAuthorizationTokenHeader(),
+	         success: function (data, textStatus, jqXHR) {
+	            showResponse(jqXHR.status, JSON.stringify(data));
+	         },
+	         error: function (jqXHR, textStatus, errorThrown) {
+	            showResponse(jqXHR.status, jqXHR.responseJSON.message)
+	         }
+	      });
+	   });
+
    $("#exampleServiceBtn").click(function () {
       $.ajax({
          url: "/api/person",
@@ -177,10 +212,15 @@ $(function () {
    });
 
    // INITIAL CALLS =============================================================
-   if (getJwtToken()) {
+   var token = getJwtToken()
+   const notExpires = checkTokenValidity(token);
+   if (notExpires) {
       $login.hide();
       $notLoggedIn.hide();
       showTokenInformation();
       showUserInformation();
+   } else{
+      removeJwtToken();
+      //window.location = "/index.html";
    }
 });

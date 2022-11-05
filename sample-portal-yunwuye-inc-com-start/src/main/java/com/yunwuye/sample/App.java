@@ -2,9 +2,9 @@ package com.yunwuye.sample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
-
 import com.alibaba.dubbo.spring.boot.annotation.EnableDubboConfiguration;
 import com.yunwuye.sample.aop.AspectControllerExceptionAOP;
 
@@ -17,7 +17,7 @@ import com.yunwuye.sample.aop.AspectControllerExceptionAOP;
  */
 @EnableDubboConfiguration
 @ConfigurationProperties(prefix = "dubbo.application")
-@SpringBootApplication(scanBasePackages = { "com.yunwuye.sample" })
+@SpringBootApplication (scanBasePackages = { "com.yunwuye.sample" }, exclude = ErrorMvcAutoConfiguration.class)
 public class App {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(App.class);

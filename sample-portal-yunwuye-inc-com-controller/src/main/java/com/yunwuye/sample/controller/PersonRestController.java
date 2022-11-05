@@ -3,7 +3,7 @@ package com.yunwuye.sample.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.yunwuye.sample.result.Result;
+import com.yunwuye.sample.common.base.result.Result;
 
 @RestController
 @RequestMapping("/api")

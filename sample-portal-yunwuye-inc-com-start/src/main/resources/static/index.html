@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-   <meta charset="UTF-8">
-   <title>JWT Spring Security Demo</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>基于JWT集成的SpringBoot安全框架Demo</title>
 
    <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -26,9 +26,9 @@
 </head>
 <body>
 <div class="container">
-   <h1>JWT Spring Security Demo</h1>
+   <h1>JWT SpringBoot安全框架Demo</h1>
 
-   <div class="alert alert-danger" id="notLoggedIn">Not logged in!</div>
+   <div class="alert alert-danger" id="notLoggedIn">未登录!</div>
 
    <div class="alert alert-info text-hidden" id="loggedIn"></div>
 
@@ -36,7 +36,7 @@
       <div class="col-md-6">
          <div class="panel panel-default" id="login">
             <div class="panel-heading">
-               <h3 class="panel-title">Login</h3>
+               <h3 class="panel-title">登录</h3>
             </div>
             <div class="panel-body">
                <form id="loginForm">
@@ -56,7 +56,7 @@
                         <li>disabled & password</li>
                      </ul>
                   </div>
-                  <button type="submit" class="btn btn-default">login</button>
+                  <button type="submit" class="btn btn-default">登录</button>
                </form>
             </div>
          </div>
@@ -64,11 +64,11 @@
          <div id="userInfo">
             <div class="panel panel-default">
                <div class="panel-heading">
-                  <h3 class="panel-title">Authenticated user</h3>
+                  <h3 class="panel-title">登录成功，用户信息</h3>
                </div>
                <div class="panel-body">
                   <div id="userInfoBody"></div>
-                  <button type="button" class="btn btn-default" id="logoutButton">logout</button>
+                  <button type="button" class="btn btn-default" id="logoutButton">注销</button>
                </div>
             </div>
          </div>
@@ -76,8 +76,10 @@
 
       <div class="col-md-6">
          <div class="btn-group" role="group" aria-label="..." style="margin-bottom: 16px;">
-            <button type="button" class="btn btn-default" id="exampleServiceBtn">call example service</button>
-            <button type="button" class="btn btn-default" id="adminServiceBtn">call admin protected service</button>
+            <a href="/swagger-ui.html">JSON Web Token 令牌认证 API</a>
+            <button type="button" class="btn btn-default" id="loginUserServiceBtn">登录人员(无角色)调用方法</button>
+            <button type="button" class="btn btn-default" id="exampleServiceBtn">用户角色(ROLE_USER)调用方法</button>
+            <button type="button" class="btn btn-default" id="adminServiceBtn">管理员角色(ROLE_ADMIN)调用方法</button>
          </div>
          <div class="panel panel-default">
             <div class="panel-heading">
@@ -97,11 +99,11 @@
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Login unsuccessful</h4>
+            <h4 class="modal-title">账号或密码错误，登录不成功！</h4>
          </div>
          <div class="modal-body"></div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
          </div>
       </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->

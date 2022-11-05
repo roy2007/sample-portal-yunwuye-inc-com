@@ -1,7 +1,7 @@
 package com.yunwuye.sample.controller.user.vo;
 
 import java.util.Date;
-import com.yunwuye.sample.vo.BaseVO;
+import com.yunwuye.sample.common.base.vo.BaseVO;
 
 /**
  *

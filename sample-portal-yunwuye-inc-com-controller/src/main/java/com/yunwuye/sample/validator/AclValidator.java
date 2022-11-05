@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.yunwuye.sample.client.service.UserService;
-import com.yunwuye.sample.validator.AbstractBaseValidator;
+import com.yunwuye.sample.common.validator.AbstractBaseValidator;
+import com.yunwuye.sample.service.UserService;
 import com.yunwuye.sample.validator.annotation.ValidatorConfig;
 import lombok.extern.slf4j.Slf4j;
 

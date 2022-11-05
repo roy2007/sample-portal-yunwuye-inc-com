@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.google.common.collect.Lists;
-import com.yunwuye.sample.client.service.AccountUserService;
+import com.yunwuye.sample.common.base.dto.RoleDTO;
+import com.yunwuye.sample.common.base.result.Result;
 import com.yunwuye.sample.dto.AccountUserDTO;
-import com.yunwuye.sample.dto.RoleDTO;
-import com.yunwuye.sample.result.Result;
+import com.yunwuye.sample.service.AccountUserService;
 
 /**
  * Authenticate a user from the database.

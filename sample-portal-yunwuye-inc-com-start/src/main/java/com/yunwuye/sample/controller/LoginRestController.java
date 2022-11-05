@@ -21,34 +21,29 @@ import com.yunwuye.sample.security.jwt.TokenProvider;
  */
 @RestController
 @RequestMapping("/api")
-public class AuthenticationRestController {
+public class LoginRestController {
 
    private final TokenProvider tokenProvider;
 
    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-   public AuthenticationRestController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+   public LoginRestController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
       this.tokenProvider = tokenProvider;
       this.authenticationManagerBuilder = authenticationManagerBuilder;
    }
 
    @PostMapping("/authenticate")
-   public ResponseEntity<JWTToken> authorize(@Valid @RequestBody LoginDto loginDto) {
-
-      UsernamePasswordAuthenticationToken authenticationToken =
-         new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
-
-      Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-
-      boolean rememberMe = (loginDto.isRememberMe() == null) ? false : loginDto.isRememberMe();
-      String jwt = tokenProvider.createToken(authentication, rememberMe);
-
-      HttpHeaders httpHeaders = new HttpHeaders();
+    public ResponseEntity<JWTToken> authorize (@Valid @RequestBody LoginDto loginDto) {
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken (
+                        loginDto.getUsername (), loginDto.getPassword ());
+        Authentication authentication = authenticationManagerBuilder.getObject ().authenticate (authenticationToken);
+        SecurityContextHolder.getContext ().setAuthentication (authentication);
+        boolean rememberMe = (loginDto.isRememberMe () == null) ? false : loginDto.isRememberMe ();
+        String jwt = tokenProvider.createToken (authentication, rememberMe);
+        HttpHeaders httpHeaders = new HttpHeaders ();
         httpHeaders.add (tokenProvider.getAuthorizeHeaderKey (), tokenProvider.getAuthorizePrefixKey () + jwt);
-
-      return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
-   }
+        return new ResponseEntity<> (new JWTToken (jwt), httpHeaders, HttpStatus.OK);
+    }
 
    /**
     * Object to return as body in JWT Authentication.

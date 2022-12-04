@@ -34,9 +34,13 @@ public class LoginRestController {
 
    @PostMapping("/authenticate")
     public ResponseEntity<JWTToken> authorize (@Valid @RequestBody LoginDto loginDto) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken (
-                        loginDto.getUsername (), loginDto.getPassword ());
-        Authentication authentication = authenticationManagerBuilder.getObject ().authenticate (authenticationToken);
+        UsernamePasswordAuthenticationToken authenticationToken = 
+                        new UsernamePasswordAuthenticationToken (
+                                        loginDto.getUsername (), 
+                                        loginDto.getPassword ());
+        Authentication authentication = 
+          authenticationManagerBuilder.getObject ()
+          .authenticate (authenticationToken);
         SecurityContextHolder.getContext ().setAuthentication (authentication);
         boolean rememberMe = (loginDto.isRememberMe () == null) ? false : loginDto.isRememberMe ();
         String jwt = tokenProvider.createToken (authentication, rememberMe);

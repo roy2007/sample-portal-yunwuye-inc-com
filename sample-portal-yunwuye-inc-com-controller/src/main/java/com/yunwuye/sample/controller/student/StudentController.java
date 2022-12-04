@@ -10,9 +10,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.yunwuye.sample.common.base.param.PageParam;
+import com.yunwuye.sample.common.base.result.PageResult;
 import com.yunwuye.sample.common.base.result.Result;
 import com.yunwuye.sample.controller.BaseController;
 import com.yunwuye.sample.controller.student.vo.StudentVO;
@@ -25,7 +28,7 @@ import com.yunwuye.sample.service.StudentService;
  *
  * @date 2020年6月27日-下午10:42:32
  */
-@CrossOrigin (origins = { "${cross.url.regx}", "chrome-extension://*" })
+@CrossOrigin (origins = { "${cross.url.regx}", "chrome-extension://iokbnmhbhkmajhlhkmmifljoffipfjhm" })
 @RestController
 @RequestMapping ("/student")
 @EnableAutoConfiguration
@@ -45,6 +48,19 @@ public class StudentController extends BaseController{
         return result;
     }
 
+    @PostMapping ("/query")
+    public PageResult<List<StudentDTO>> queryStudentById (@RequestBody PageParam<StudentVO> param) {
+        StudentVO queryVO = param.getParams ();
+        StudentDTO queryDTO = new StudentDTO ();
+        if (queryVO != null) {
+            BeanUtils.copyProperties (queryVO, queryDTO);
+        }
+        logger.info ("Query studentBy conditions param: {}", param);
+        PageResult<List<StudentDTO>> queryResult = studentService.queryPageByCondition (queryDTO, param.getOffset (),
+                        param.getLimit ());
+        return queryResult;
+    }
+
     @PostMapping ("/find")
     public Result<StudentVO> postFindStudentById (Long id) {
         Result<StudentVO> result = new Result<> ();
@@ -54,6 +70,7 @@ public class StudentController extends BaseController{
         result.setData (target);
         return result;
     }
+
     /**
      * 
      * @param isAsync 是否异步处理

@@ -140,6 +140,7 @@ public class AspectControllerExceptionAOP{
 
     private Result<?> handlerException (ProceedingJoinPoint pjp, Throwable t, HttpServletRequest request,
                     String inputParam) {
+        t.printStackTrace ();
         Result<?> failResult = ResultUtil.createFailResult (CommonResultCode.BIZ_FAIL);
         Object[] args = { request.getRequestURI (), pjp.getSignature (), inputParam, t.getMessage () };
         makeErrorLog (args);

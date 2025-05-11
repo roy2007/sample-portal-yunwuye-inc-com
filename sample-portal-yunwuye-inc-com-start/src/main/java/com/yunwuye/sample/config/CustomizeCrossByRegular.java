@@ -44,7 +44,7 @@ public class CustomizeCrossByRegular implements WebMvcRegistrations{
                 if (CollectionUtils.isEmpty (allowedOrigins)) {
                     return null;
                 }
-                return postCheckOriginByRegx (allowedOrigins, checkAfterRequestOrigin);
+                return postCheckOriginByRegx (allowedOrigins, requestOrigin);
             }
 
             private String postCheckOriginByRegx (List<String> allowedOrigins, String requestOrigin) {

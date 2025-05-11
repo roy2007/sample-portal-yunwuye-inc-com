@@ -73,8 +73,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         .addFilterBefore (corsFilter, UsernamePasswordAuthenticationFilter.class)
                         // If a user try to access a resource without having enough permissions
                         .exceptionHandling ()
-                        .authenticationEntryPoint (authenticationErrorHandler)
                         .accessDeniedHandler (jwtAccessDeniedHandler)
+                        .authenticationEntryPoint (authenticationErrorHandler)
                         // enable h2-console
                         .and ()
                         .headers ()
